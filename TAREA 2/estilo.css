@@ -1,0 +1,255 @@
+/* Trae el tipo de letra desde Google */
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700');
+
+/* Quita los márgenes que el navegador pone por defecto */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Diseño general de toda la página (fondo, letra y márgenes) */
+body {
+  background-color: #fff;
+  color: #fff;
+  font-family: 'Ubuntu', sans-serif;
+  margin: 5%;
+}
+
+/* Caja del encabezado principal */
+header {
+  text-align: center;
+  background-color: #191F35;
+}
+
+/* Espaciado de los textos del encabezado */
+header h1,
+header h2 {
+  font-weight: normal;
+  line-height: 1;
+}
+
+/* Hace que el subtítulo sea un poco transparente */
+header h2 {
+  margin-top: 5px;
+  opacity: 0.5;
+}
+
+/* Tamaños de los diferentes títulos */
+h1 { font-size: 4em; }
+h2 { font-size: 1.5em; }
+h3 { 
+  font-size: 1.5em;
+  margin-bottom: 1%;
+}
+h4 { margin-top: 5%; }
+
+/* Diseño de los iconos (circulitos) en la columna de habilidades */
+.habilidades i {
+    font-size: 0.8em;
+    color: #5106e8;
+    background: #fff;
+    border-radius: 2em;
+    padding: 2px;
+    width: 1.5em;
+    height: 1.5em;
+    text-align: center;
+    vertical-align: center;
+    line-height: 1.5em; 
+}
+
+/* Diseño de los iconos en la columna de experiencia */
+.experiencia i {
+    font-size: 0.8em;
+    color: #fff;
+    background: #5106e8;
+    border-radius: 2em;
+    padding: 2px;
+    width: 1.5em;
+    height: 1.5em;
+    text-align: center;
+    vertical-align: center;
+    line-height: 1.5em; 
+}
+
+/* La caja principal que envuelve todo tu currículum */
+.container {
+  background-color: #1F253D;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Prepara la parte de arriba para ponerle el fondo */
+.cabecera {
+  position: relative;
+}
+
+/* Pone la imagen de fondo transparente detrás de tu foto y nombre */
+.cabecera::before {
+ content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('img/fondo_cabecera_cv.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+/* Hace que tu foto sea un círculo perfecto con borde morado */
+.contenedor_foto_perfil {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  border: 7px solid #5106e8;
+  margin: 5%;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Ajusta la imagen para que no se deforme dentro del círculo */
+.contenedor_foto_perfil img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Acomoda tu nombre y título al lado de la foto */
+.nombre_puesto {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 1%;
+  text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Divide la parte de abajo en dos columnas */
+.contenido_cv {
+  display: flex;
+  width: 100%;
+}
+
+/* Columna izquierda (fondo morado) */
+.habilidades {
+  display: inline-block;
+  vertical-align: top;
+  background-color: #5106e8;
+  padding: 5%;
+  width: 28%;
+}
+
+/* Margen para las listas de la izquierda */
+.habilidades ul {
+  margin-left: 5%;
+}
+
+/* Justifica el texto de tu presentación */
+.carta_presentacion {
+  text-align: justify;
+}
+
+/* Molde principal para los círculos de porcentaje */
+.grafico {
+  width: 34px;
+  height: 34px;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 1%;
+}
+
+/* El hueco del centro para que parezca una dona */
+.donut-hole {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  background-color: #5106e8;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Base para las rebanadas de colores del gráfico */
+.sector {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  transform-origin: left;
+}
+
+/* Colores y rotación de cada rebanada del gráfico */
+#sector1 {
+  transform: rotate(0deg);
+  background-color: #f91c8a;
+}
+#sector2 {
+  transform: rotate(120deg);
+  background-color: #2d0b7c;
+}
+#sector3 {
+  transform: rotate(240deg);
+  background-color: #58d1bc;
+}
+
+/* Acomoda el texto al lado de los gráficos */
+.habilidad {
+  display: inline-block;
+  margin-top: 1%;
+  vertical-align: middle;
+}
+
+/* Columna derecha (experiencia, estudios, etc.) */
+.experiencia {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 5%;
+  width: 50%;
+}
+
+/* Alinea los títulos de la derecha */
+.experiencia h3 {
+  text-align: right;
+}
+
+/* Acomoda el nombre de la empresa a la izquierda */
+.nombre_empresa {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+}
+
+/* Acomoda las fechas a la derecha */
+.año_puesto {
+  display: inline-block;
+  vertical-align: top;
+  text-align: right;
+  width: 49%;
+}
+
+/* Da espacio y justifica las descripciones de los puestos */
+.descripcion_puesto {
+  margin-top: 3%;
+  text-align: justify;
+}
+
+/* Fuerza una separación grande entre las secciones principales */
+.separacion-seccion {
+    margin-top: 80px;
+}
+
+/* Anula los márgenes para pegar textos (ej. el correo) */
+.texto-unido {
+    margin-top: 0px !important;
+}
