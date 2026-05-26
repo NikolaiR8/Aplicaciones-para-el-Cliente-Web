@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Inventario - ULEAM</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="login-container" id="loginScreen">
+        <div class="login-card">
+            <img src="logo-uleam.png" alt="Logo ULEAM" class="logo" onerror="this.src='https://via.placeholder.com/150x50?text=ULEAM'">
+            <h2>Ingreso al Sistema</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Usuario:</label>
+                    <input type="text" id="username" placeholder="Ingrese su usuario" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" placeholder="Ingrese su contraseña">
+                </div>
+                <span class="error-msg" id="loginError"></span>
+                <button type="submit" class="btn-primary">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="dashboard-container hidden" id="dashboardScreen">
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="logo-uleam.png" alt="Logo ULEAM" class="logo" onerror="this.src='https://via.placeholder.com/150x50?text=ULEAM'">
+            </div>
+            <nav class="menu" id="sideMenu">
+                <a href="#" class="menu-item active" data-target="view-control">💻 Control de Máquinas</a>
+                <a href="#" class="menu-item" data-target="view-registrar">➕ Registrar/Editar PC</a>
+                <a href="#" class="menu-item" data-target="view-mantenimientos">🛠️ Mantenimientos</a>
+                <a href="#" class="menu-item" data-target="view-reportes">📊 Reportes de Uso</a>
+            </nav>
+            <div class="user-profile">
+                <p>Admin: Nikolái M. Rengifo</p>
+                <small>Facultad de Ciencias de la Vida y Tecnologías</small>
+                <button id="btnLogout" class="btn-logout">Cerrar Sesión</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <h1 id="headerTitle">Gestión de Laboratorios TI - ULEAM</h1>
+            </header>
+
+            <section id="view-control" class="view-section">
+                <div class="card table-card">
+                    <h2>Estado Actual de Laboratorios</h2>
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Máquina</th>
+                                <th>Usuario Actual</th>
+                                <th>Estado</th>
+                                <th>Próx. Mantenimiento</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="view-registrar" class="view-section hidden">
+                <div class="card form-card">
+                    <h2 id="formTitle">Registrar Nueva Máquina</h2>
+                    <form id="inventoryForm">
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <label for="machineId">ID de la Máquina:</label>
+                                <input type="text" id="machineId" placeholder="Ej. LAB1-PC05">
+                                <span class="error-msg" id="errorId"></span>
+                            </div>
+                            <div class="form-group half">
+                                <label for="lastUser">Último Usuario / Actual:</label>
+                                <input type="text" id="lastUser" placeholder="Nombre del estudiante o clase">
+                                <span class="error-msg" id="errorUser"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <label for="machineStatus">Estado Operativo:</label>
+                                <select id="machineStatus">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Optimo">Óptimo</option>
+                                    <option value="Mantenimiento">En Mantenimiento</option>
+                                    <option value="Danado">Dañado / Requiere Cambio</option>
+                                </select>
+                                <span class="error-msg" id="errorStatus"></span>
+                            </div>
+                            <div class="form-group half">
+                                <label for="maintDate">Próximo Mantenimiento:</label>
+                                <input type="date" id="maintDate">
+                                <span class="error-msg" id="errorDate"></span>
+                            </div>
+                        </div>
+                        <div class="form-row" style="gap: 10px; margin-top: 10px;">
+                            <button type="submit" class="btn-primary" id="btnSubmit">Guardar Máquina</button>
+                            <button type="button" class="btn-secondary hidden" id="btnCancel">Cancelar Edición</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section id="view-mantenimientos" class="view-section hidden">
+                <div class="card">
+                    <h2>Equipos que requieren atención prioritaria</h2>
+                    <p style="margin-bottom: 15px; color: var(--text-light);">Aquí se muestran únicamente las máquinas en Mantenimiento o Dañadas.</p>
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Máquina</th>
+                                <th>Estado</th>
+                                <th>Fecha Límite</th>
+                            </tr>
+                        </thead>
+                        <tbody id="maintTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="view-reportes" class="view-section hidden">
+                <h2 style="margin-bottom: 20px; color: var(--secondary-color);">Resumen de Inventario</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total de Máquinas</h3>
+                        <p class="stat-number" id="statTotal">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Equipos Óptimos</h3>
+                        <p class="stat-number text-success" id="statOptimos">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>En Mantenimiento</h3>
+                        <p class="stat-number text-warning" id="statMaint">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Equipos Dañados</h3>
+                        <p class="stat-number text-danger" id="statDañados">0</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
